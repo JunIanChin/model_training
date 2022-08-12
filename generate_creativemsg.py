@@ -20,19 +20,13 @@ from itertools import chain
 
 
 def is_numeric(char):
-    if 48 <= ord(char) <= 57:
-        return True 
-    return False
+    return (48 <= ord(char) <= 57)
 
 def is_lowercase(char):
-    if  97 <= ord(char) <= 122:
-        return True    
-    return False 
+    return (97 <= ord(char) <= 122)
 
 def is_uppercase(char): 
-    if  65 <= ord(char) <= 90:
-        return True    
-    return False
+    return (65 <= ord(char) <= 90)
 
 def word_sub(word, mapping_list):
     result_sub_word = ""
@@ -69,14 +63,12 @@ def word_sub(word, mapping_list):
     return result_sub_word
   
 def hardcode_map_char_to_creative():
-    char_to_creative = [[]] * 26 
+    char_to_creative = []
 
     f = open('hardcoded_alpha_mapping.json')
     data = json.load(f)
 
-    for i in range(26):
-       char_to_creative[i] = data[str(chr(i+97))]
-
+    char_to_creative.append([data[chr(i+97)] for i in range(26)])
     f.close() 
 
     return char_to_creative
@@ -105,12 +97,6 @@ def get_msg_from_csv(num, csv_file_list):
 #     return random.choice([pseudo_generated_char_1, pseudo_generated_char_2]) 
 
 def main(num_msg_to_extract_per_csv, increment_size_per_csv, total_sample_to_generate): 
-
-    # normal_msgs = ["RM0.00 MyFundAction : Betul ke tahun ni raya dua kali? Klik untuk baca cerita penuh https://ezy.la/Qurban_Daftar",
-    #              "RM0 [Lalamove] Hello! Lalamove is handling your delivery (Order ID: 147296311073). Track it here: https://sg-d.lalamove.com/0bOSri",
-    #              "RM0 Your Nike verification code is: 964862",
-    #              "MFM Securities: Your withdrawal has been approved. Kindly check the below withdrawal details: Name: Muhammad Sani Abdul Ghani Account: 364098 Amount: -20 USD",
-    #              "RM0.00 MyFundAction : Betul ke tahun ni raya dua kali? Klik untuk baca cerita penuh https://ezy.la/Qurban_Daftar"]
  
     csv_file_list = ['node1_msgdatas.csv', 'node2_msgdatas.csv', 'node3_msgdatas.csv', 'node4_msgdatas.csv']
     char_to_creative = hardcode_map_char_to_creative()
